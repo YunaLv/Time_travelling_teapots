@@ -10,7 +10,7 @@ musicians = {}
 punkgenres = ["punk", "post-hardcore", "garage rock","noise rock"]
 #loading the file for each letter 
 for file_name in file_list_every_letter:
-    with open(f"C:/Users/Yunam/OneDrive/Documents/Spring 25/Python actu/GitHub/People/X_people.json", encoding='utf-8') as file:
+    with open(f"C:/Users/Yunam/OneDrive/Documents/Spring 25/Python actu/GitHub/People/A_people.json", encoding='utf-8') as file:
         letter_people = json.load(file) 
     #filtering for people listed in the dictionary who have the activestartyear listed
     for person in letter_people:
@@ -29,44 +29,47 @@ for file_name in file_list_every_letter:
                     if type(startyear) is list:
                         startyear=startyear[0]
                     
-                    if endyear == startyear:
-                        endyear=2015
+                    startyear= int(startyear)
 
+                    if startyear>1900:
+                        if endyear == startyear:
+                            endyear=2015
                     
-                
-                    YearRange=range(int(startyear), int(endyear)+1)
-                    ActiveYears=[] 
+                        YearRange=range(startyear, int(endyear)+1)
+                        ActiveYears=[] 
 
-                    for year in YearRange:
-                        ActiveYears.append(year)              
-
+                        for year in YearRange:
+                            ActiveYears.append(year)                       
 
 
 
+                        if len(ActiveYears) > 50:
+                            ActiveYears = "NOPE"
 
-                    clean_genres = []
-                    genre_group = []
-                    
-                    for genre in genres:
-                        genre = genre.lower()
-                        clean_genres.append(genre.replace("-", "_"))
-                        if "punk" in genre or genre in punkgenres: 
-                            genre_group.append("Punk")
-                        elif "rock" in genre:
-                            genre_group.append("Rock")
-                        elif "metal" in genre: 
-                            genre_group.append("Metal")
-                        elif "blues" in genre:
-                            genre_group.append("Blues")
-                    genre_group = set(genre_group)
-                    musicians[name] ={
-                       'name': name,
-                       'genre': clean_genres,
-                       'genre_group': list(genre_group),
-                       'end_year': endyear,
-                       'start_year':startyear,
-                       'active_year': ActiveYears
-                       }
+
+                        clean_genres = []
+                        genre_group = []
+                        
+                        for genre in genres:
+                            genre = genre.lower()
+                            clean_genres.append(genre.replace("-", "_"))
+                            if "punk" in genre or genre in punkgenres: 
+                                genre_group.append("Punk")
+                            elif "rock" in genre:
+                                genre_group.append("Rock")
+                            elif "metal" in genre: 
+                                genre_group.append("Metal")
+                            elif "blues" in genre:
+                                genre_group.append("Blues")
+                        genre_group = set(genre_group)
+                        musicians[name] ={
+                        'name': name,
+                        'genre': clean_genres,
+                        'genre_group': list(genre_group),
+                        'end_year': endyear,
+                        'start_year':startyear,
+                        'active_year': ActiveYears
+                        }
                     
 print(musicians)
                     
