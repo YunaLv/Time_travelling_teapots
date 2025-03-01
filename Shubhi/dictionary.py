@@ -30,9 +30,6 @@ for movie2 in liked_movies[name2]:
     either.add(movie2)  
 either_join =  ", ".join(either)
 print (f"Movies liked by either {name} or {name2}: {either}")
-
-print (len(either))
-print (len(both))
 jaccard = len(both)/len(either)
 print (f"Jaccard similarity between {name} and {name2}: {jaccard}")
 
